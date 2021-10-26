@@ -32,7 +32,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "prettier --write . && git add -A . &&  npm run pretest"
+      "pre-commit": "npm run format &&  npm run pretest"
     }
   }
 }
