@@ -1,1 +1,0 @@
-# Sociolib-frontend
