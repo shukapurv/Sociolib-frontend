@@ -2,11 +2,12 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import axios from "axios";
+import Cookie from "js-cookie";
 
 const Login = () => {
   const router = useRouter();
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (Cookie.get("token")) {
       router.push("/");
     }
   }, []);
@@ -25,7 +26,7 @@ const Login = () => {
       .post(`http://127.0.0.1:8000/auth/login/`, data)
       .then((response) => {
         router.push("/");
-        localStorage.setItem("token", response.data.token);
+        Cookie.set("token", response.data.token);
       })
       .catch((err) => {
         console.error(err);
