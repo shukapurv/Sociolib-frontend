@@ -1,11 +1,14 @@
 import { Box, Grid, makeStyles, useTheme } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AlertMsg from "@components/AlertMsg";
 import Heading from "@components/Heading";
 import Heading2 from "@components/Heading2";
 import Paragraph from "@components/Paragraph";
 import RandomShapes from "@components/RandomShapes";
 import CustContainer from "@components/UI/CustContainer";
+import Cookie from "js-cookie";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   form: { width: "100%" },
@@ -59,25 +62,30 @@ const useStyles = makeStyles((theme) => ({
 const Form = () => {
   const classes = useStyles();
   const theme = useTheme();
-  const [login, setLogin] = useState(true);
-  const [name, setUsername] = useState("");
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
+  // useEffect(() => {
+  //   if (Cookie.get("Token")) {
+  //     router.push("/");
+  //   }
+  // }, []);
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    if (phone === "" || phone.length < 10) {
-      setAlert(true);
-      setTimeout(() => setAlert(false), 1500);
-    } else {
-      // send msg
-      console.log({ newRegisteredApi: phone });
-      setMsgAlert(true);
-      setTimeout(() => setMsgAlert(false), 1500);
-      setPhone("");
-      setName("");
-      setEmail("");
-    }
+  const data = {
+    username: username,
+    password: password,
+  };
+
+  const loginfunc = () => {
+    axios
+      .post(`http://127.0.0.1:8000/auth/login/`, data)
+      .then((response) => {
+        router.push("/");
+        Cookie.set("Token", response.data.token);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
@@ -103,145 +111,71 @@ const Form = () => {
             </Paragraph>
           </Box>
         </Grid>
-        {login ? (
-          <Grid
-            item
-            sm={6}
-            xs={12}
-            container
-            justifyContent="center"
-            alignItems="center"
-            // textAlign="center"
+
+        <Grid
+          item
+          sm={6}
+          xs={12}
+          container
+          justifyContent="center"
+          alignItems="center"
+        // textAlign="center"
+        >
+          <div
+            className={classes.form}
+          // onSubmit={onSubmitHandler}
           >
-            <form
-              className={classes.form}
-              // onSubmit={onSubmitHandler}
-              action=""
-              method="post">
-              <Box mb={3} data-aos="fade-right" data-aos-duration={600}>
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="enter your username"
-                  className={classes.input}
-                  onChange={(e) => setUsername(e.target.value)}
-                  value={name}
-                  required
-                />
-              </Box>
-              <Box mb={3} data-aos="fade-right" data-aos-duration={600}>
-                <input
-                  type="password"
-                  name="pswd"
-                  id="pswd"
-                  placeholder="enter your password"
-                  className={classes.input}
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                  required
-                />
-              </Box>
-              <Box
-                textAlign="center"
-                data-aos="fade-right"
-                data-aos-delay="200"
-                data-aos-duration={600}>
-                <button className={classes.submitBtn} type="submit">
-                  submit
-                </button>
-              </Box>
-              <Box
-                textAlign="center"
-                data-aos="fade-right"
-                data-aos-delay="200"
-                data-aos-duration={600}>
-                <div className="flex items-center p-4 justify-center">
-                  <Paragraph>Don't have an Account??</Paragraph>
-                  <div
-                    className="text-blue-500 pl-2 cursor-pointer"
-                    onClick={() => setLogin(false)}>
-                    SignUp Now
-                  </div>
+            <Box mb={3} data-aos="fade-right" data-aos-duration={600}>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="enter your username"
+                className={classes.input}
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
+                required
+              />
+            </Box>
+            <Box mb={3} data-aos="fade-right" data-aos-duration={600}>
+              <input
+                type="password"
+                name="pswd"
+                id="pswd"
+                placeholder="enter your password"
+                className={classes.input}
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                required
+              />
+            </Box>
+            <Box
+              textAlign="center"
+              data-aos="fade-right"
+              data-aos-delay="200"
+              data-aos-duration={600}>
+              <div className={classes.submitBtn} onClick={() => {
+                loginfunc();
+              }}>
+                submit
+              </div>
+            </Box>
+            <Box
+              textAlign="center"
+              data-aos="fade-right"
+              data-aos-delay="200"
+              data-aos-duration={600}>
+              <div className="flex items-center p-4 justify-center">
+                <Paragraph>Don't have an Account??</Paragraph>
+                <div
+                  className="text-blue-500 pl-2 cursor-pointer"
+                  onClick={() => router.push("/register")}>
+                  SignUp Now
                 </div>
-              </Box>
-            </form>
-          </Grid>
-        ) : (
-          <Grid
-            item
-            sm={6}
-            xs={12}
-            container
-            justifyContent="center"
-            alignItems="center"
-            // textAlign="center"
-          >
-            <form
-              className={classes.form}
-              // onSubmit={onSubmitHandler}
-              action=""
-              method="post">
-              <Box mb={3} data-aos="fade-right" data-aos-duration={600}>
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="enter your username"
-                  className={classes.input}
-                  onChange={(e) => setUsername(e.target.value)}
-                  value={name}
-                  required
-                />
-              </Box>
-              <Box mb={3} data-aos="fade-right" data-aos-duration={600}>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="enter your email"
-                  className={classes.input}
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                  required
-                />
-              </Box>
-              <Box mb={3} data-aos="fade-right" data-aos-duration={600}>
-                <input
-                  type="password"
-                  name="pswd"
-                  id="pswd"
-                  placeholder="enter your password"
-                  className={classes.input}
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                  required
-                />
-              </Box>
-              <Box
-                textAlign="center"
-                data-aos="fade-right"
-                data-aos-delay="200"
-                data-aos-duration={600}>
-                <button className={classes.submitBtn} type="submit">
-                  submit
-                </button>
-              </Box>
-              <Box
-                textAlign="center"
-                data-aos="fade-right"
-                data-aos-delay="200"
-                data-aos-duration={600}>
-                <div className="flex items-center p-4 justify-center">
-                  <Paragraph>Already have an Account??</Paragraph>
-                  <div className="text-blue-500 pl-2 cursor-pointer" onClick={() => setLogin(true)}>
-                    SignIn
-                  </div>
-                </div>
-              </Box>
-            </form>
-          </Grid>
-        )}
+              </div>
+            </Box>
+          </div>
+        </Grid>
       </Grid>
     </CustContainer>
   );

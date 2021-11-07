@@ -107,7 +107,7 @@ const TopSection = () => {
         sm={6}
         xs={6}
         alignItems="center"
-        justify="center"
+        justifyContent="center"
         data-aos="fade-left"
         data-aos-duration={800}>
         <img src={HomeLanding} alt="Landing page image" className={classes.herosection__img} />
