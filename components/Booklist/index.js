@@ -41,7 +41,7 @@ const Books = (props) => {
   };
 
   const listItems = filterBooks.map((a) => (
-    <li>
+    <li key={a.id}>
       <Card {...a} />
     </li>
   ));

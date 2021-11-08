@@ -16,7 +16,6 @@ export default function Home() {
       <Box mt={3}>
         <Books />
       </Box>
-
       <Footer />
     </>
   );
