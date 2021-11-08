@@ -193,7 +193,7 @@ const Headers = () => {
                 </li>
                 <NavigationDropdown label="Library">
                   <li>
-                    <Link href="/learn/fantasy-finance" onClick={() => setOpen(false)}>
+                    <Link href="/books" onClick={() => setOpen(false)}>
                       All Books
                     </Link>
                   </li>

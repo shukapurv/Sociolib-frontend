@@ -75,15 +75,14 @@ const Form = () => {
   // }, []);
 
   const data = {
-    username: username,
-    password: password,
+    username,
+    password,
     first_name: firstname,
     last_name: lastname,
-    email: email
+    email,
   };
 
   const registerfunc = () => {
-
     axios
       .post(`http://127.0.0.1:8000/auth/register/`, data)
       .then((response) => {
@@ -125,7 +124,7 @@ const Form = () => {
           container
           justifyContent="center"
           alignItems="center"
-        // textAlign="center"
+          // textAlign="center"
         >
           <form
             className={classes.form}
@@ -197,9 +196,11 @@ const Form = () => {
               data-aos="fade-right"
               data-aos-delay="200"
               data-aos-duration={600}>
-              <div className={classes.submitBtn} onClick={() => {
-                registerfunc();
-              }}>
+              <div
+                className={classes.submitBtn}
+                onClick={() => {
+                  registerfunc();
+                }}>
                 submit
               </div>
             </Box>
@@ -210,14 +211,15 @@ const Form = () => {
               data-aos-duration={600}>
               <div className="flex items-center p-4 justify-center">
                 <Paragraph>Already have an Account??</Paragraph>
-                <div className="text-blue-500 pl-2 cursor-pointer" onClick={() => router.push("/login")}>
+                <div
+                  className="text-blue-500 pl-2 cursor-pointer"
+                  onClick={() => router.push("/login")}>
                   SignIn
                 </div>
               </div>
             </Box>
           </form>
         </Grid>
-
       </Grid>
     </CustContainer>
   );
