@@ -72,8 +72,8 @@ const Form = () => {
   // }, []);
 
   const data = {
-    username: username,
-    password: password,
+    username,
+    password,
   };
 
   const loginfunc = () => {
@@ -119,11 +119,11 @@ const Form = () => {
           container
           justifyContent="center"
           alignItems="center"
-        // textAlign="center"
+          // textAlign="center"
         >
           <div
             className={classes.form}
-          // onSubmit={onSubmitHandler}
+            // onSubmit={onSubmitHandler}
           >
             <Box mb={3} data-aos="fade-right" data-aos-duration={600}>
               <input
@@ -154,9 +154,11 @@ const Form = () => {
               data-aos="fade-right"
               data-aos-delay="200"
               data-aos-duration={600}>
-              <div className={classes.submitBtn} onClick={() => {
-                loginfunc();
-              }}>
+              <div
+                className={classes.submitBtn}
+                onClick={() => {
+                  loginfunc();
+                }}>
                 submit
               </div>
             </Box>

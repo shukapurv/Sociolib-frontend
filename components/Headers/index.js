@@ -193,7 +193,7 @@ const Headers = () => {
                 </li>
                 <NavigationDropdown label="Library">
                   <li>
-                    <Link href="/learn/fantasy-finance" onClick={() => setOpen(false)}>
+                    <Link href="/books" onClick={() => setOpen(false)}>
                       All Books
                     </Link>
                   </li>
@@ -219,8 +219,13 @@ const Headers = () => {
               <span onClick={() => setOpen(!open)} className={`${classes.toggler}`}>
                 <MenuRoundedIcon style={{ fontSize: "35px" }} />
               </span>
-              <div className={classes.btn}>
-                <Link href="/login">Sign In</Link>
+              <div className="rounded">
+                <img
+                  className="object-cover relative rounded-full border
+          border-gray-100 shadow-sm
+     h-12 w-12"
+                  src="https://images.unsplash.com/photo-1636373590511-e4c18b2d6167?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0Mnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                />
               </div>
             </Grid>
           </Grid>
