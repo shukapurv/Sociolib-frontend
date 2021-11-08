@@ -13,7 +13,10 @@ export default function Home() {
         <meta name="keywords" content="  " />
       </Helmet>
       <Headers />
-      <Books />
+      <Box mt={3}>
+        <Books />
+      </Box>
+
       <Footer />
     </>
   );

@@ -4,7 +4,7 @@ import { Box, makeStyles } from "@material-ui/core";
 const Card = (props) => {
   return (
     <>
-      <div className="container mt-32 mx-auto p-4 md:p-0">
+      <div className="container mt-20 mx-auto p-4 md:p-0">
         <div className="shadow-lg flex flex-wrap w-full lg:w-4/5 mx-auto">
           <div
             className="bg-cover bg-bottom border w-full md:w-1/3 h-64 md:h-auto relative"
@@ -33,7 +33,7 @@ const Card = (props) => {
                   <button
                     type="button"
                     className="bg-white hover:bg-grey-darker hover:text-white border border-solid border-grey w-1/3 lg:w-full py-2">
-                    Visit now
+                    Open
                   </button>
                 </div>
               </div>
