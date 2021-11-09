@@ -228,8 +228,7 @@ const Headers = () => {
               </ul>
             </Grid>
             <Grid item xs={2} container alignItems="center" justifyContent="flex-end">
-
-              {Cookie.get("Token") ?
+              {Cookie.get("Token") ? (
                 <div className="rounded">
                   <img
                     className="object-cover relative rounded-full border
@@ -237,18 +236,17 @@ const Headers = () => {
    h-12 w-12"
                     src="https://images.unsplash.com/photo-1636373590511-e4c18b2d6167?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0Mnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
                   />
-                </div> :
+                </div>
+              ) : (
                 <Link href="/login">
                   <div className="cursor-pointer">
                     <span onClick={() => setOpen(!open)} className={`${classes.toggler}`}>
                       <MenuRoundedIcon style={{ fontSize: "35px" }} />
                     </span>
-                    <div className={classes.btn}>
-                      Sign In
-                    </div>
+                    <div className={classes.btn}>Sign In</div>
                   </div>
-                </Link>}
-
+                </Link>
+              )}
             </Grid>
           </Grid>
         </Container>
