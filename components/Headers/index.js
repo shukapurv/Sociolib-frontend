@@ -4,7 +4,9 @@ import React, { useEffect, useRef, useState } from "react";
 import NavigationDropdown from "@components/NavigationDropdown";
 import { NavigationLink } from "@components/UI/Buttons";
 import Link from "next/link";
+import Head from "next/head";
 import Container from "@components/Container";
+import Cookie from "js-cookie";
 
 const Logo = "/assets/images/logo.jpg";
 
@@ -41,6 +43,8 @@ const useStyles = makeStyles((theme) => ({
         width: "120px",
       },
     },
+    fontSize: "1.4rem",
+    fontFamily: "Merienda",
     cursor: "pointer",
   },
   hamMenu: {
@@ -167,6 +171,14 @@ const Headers = () => {
   }, []);
   return (
     <>
+      <Head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Merienda"
+          as="font"
+          crossOrigin=""
+        />
+      </Head>
       <Box
         ref={headerRef}
         className={
@@ -216,17 +228,27 @@ const Headers = () => {
               </ul>
             </Grid>
             <Grid item xs={2} container alignItems="center" justifyContent="flex-end">
-              <span onClick={() => setOpen(!open)} className={`${classes.toggler}`}>
-                <MenuRoundedIcon style={{ fontSize: "35px" }} />
-              </span>
-              <div className="rounded">
-                <img
-                  className="object-cover relative rounded-full border
-          border-gray-100 shadow-sm
-     h-12 w-12"
-                  src="https://images.unsplash.com/photo-1636373590511-e4c18b2d6167?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0Mnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                />
-              </div>
+
+              {Cookie.get("Token") ?
+                <div className="rounded">
+                  <img
+                    className="object-cover relative rounded-full border
+        border-gray-100 shadow-sm
+   h-12 w-12"
+                    src="https://images.unsplash.com/photo-1636373590511-e4c18b2d6167?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0Mnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                  />
+                </div> :
+                <Link href="/login">
+                  <div className="cursor-pointer">
+                    <span onClick={() => setOpen(!open)} className={`${classes.toggler}`}>
+                      <MenuRoundedIcon style={{ fontSize: "35px" }} />
+                    </span>
+                    <div className={classes.btn}>
+                      Sign In
+                    </div>
+                  </div>
+                </Link>}
+
             </Grid>
           </Grid>
         </Container>

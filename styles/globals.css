@@ -79,3 +79,11 @@ code {
   transform: translateY(0);
   opacity: 1;
 }
+
+@font-face {
+  font-family: "Merienda";
+  src: url("https://fonts.googleapis.com/css?family=Merienda");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
