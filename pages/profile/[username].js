@@ -4,6 +4,7 @@ import { Box, makeStyles } from "@material-ui/core";
 import { Helmet } from "react-helmet";
 import Footer from "@components/Footer";
 import { useRouter } from "next/router";
+import ProfileComp from "@components/profile/index";
 
 const Profile = () => {
   const { query } = useRouter();
@@ -15,6 +16,7 @@ const Profile = () => {
         <meta name="keywords" content="  " />
       </Helmet>
       <Headers />
+      <ProfileComp />
       <Footer />
     </>
   );
