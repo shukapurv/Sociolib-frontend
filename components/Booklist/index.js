@@ -2,10 +2,23 @@ import React, { useState } from "react";
 import { Box } from "@material-ui/core";
 import { list } from "../../list";
 import Card from "./Card";
+import axios from "axios";
 
 const Books = () => {
   const [filterBooks, setFilterBooks] = useState(list);
   const [searchKey, setSearchKey] = useState("");
+  React.useEffect(() => {
+    axios
+      .get(`http://127.0.0.1:8000/library/books/`)
+      .then((res) => {
+        console.log(res)
+        setFilterBooks(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
   React.useEffect(() => {
     let result;
     if (searchKey.length === 0) result = list;

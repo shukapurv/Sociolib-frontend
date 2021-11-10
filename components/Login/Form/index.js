@@ -65,11 +65,11 @@ const Form = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  // useEffect(() => {
-  //   if (Cookie.get("Token")) {
-  //     router.push("/");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (Cookie.get("Token")) {
+      router.push("/");
+    }
+  }, []);
 
   const data = {
     username,
@@ -119,11 +119,9 @@ const Form = () => {
           container
           justifyContent="center"
           alignItems="center"
-          // textAlign="center"
         >
           <div
             className={classes.form}
-            // onSubmit={onSubmitHandler}
           >
             <Box mb={3} data-aos="fade-right" data-aos-duration={600}>
               <input
