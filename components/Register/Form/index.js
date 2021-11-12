@@ -124,14 +124,13 @@ const Form = () => {
           container
           justifyContent="center"
           alignItems="center"
-        // textAlign="center"
+          // textAlign="center"
         >
           <form
             className={classes.form}
             // onSubmit={onSubmitHandler}
             action=""
-            method="post"
-          >
+            method="post">
             <Box mb={3} data-aos="fade-right" data-aos-duration={600}>
               <input
                 type="text"
@@ -196,14 +195,12 @@ const Form = () => {
               textAlign="center"
               data-aos="fade-right"
               data-aos-delay="200"
-              data-aos-duration={600}
-            >
+              data-aos-duration={600}>
               <div
                 className={classes.submitBtn}
                 onClick={() => {
                   registerfunc();
-                }}
-              >
+                }}>
                 submit
               </div>
             </Box>
@@ -211,14 +208,12 @@ const Form = () => {
               textAlign="center"
               data-aos="fade-right"
               data-aos-delay="200"
-              data-aos-duration={600}
-            >
+              data-aos-duration={600}>
               <div className="flex items-center p-4 justify-center">
                 <Paragraph>Already have an Account??</Paragraph>
                 <div
                   className="text-blue-500 pl-2 cursor-pointer"
-                  onClick={() => router.push("/login")}
-                >
+                  onClick={() => router.push("/login")}>
                   SignIn
                 </div>
               </div>

@@ -142,14 +142,12 @@ const Form = () => {
               textAlign="center"
               data-aos="fade-right"
               data-aos-delay="200"
-              data-aos-duration={600}
-            >
+              data-aos-duration={600}>
               <div
                 className={classes.submitBtn}
                 onClick={() => {
                   loginfunc();
-                }}
-              >
+                }}>
                 submit
               </div>
             </Box>
@@ -157,14 +155,12 @@ const Form = () => {
               textAlign="center"
               data-aos="fade-right"
               data-aos-delay="200"
-              data-aos-duration={600}
-            >
+              data-aos-duration={600}>
               <div className="flex items-center p-4 justify-center">
                 <Paragraph>Don't have an Account??</Paragraph>
                 <div
                   className="text-blue-500 pl-2 cursor-pointer"
-                  onClick={() => router.push("/register")}
-                >
+                  onClick={() => router.push("/register")}>
                   SignUp Now
                 </div>
               </div>

@@ -31,15 +31,13 @@ const WrapperFullVh = ({ children }) => {
     <Box
       justify="center"
       // flexWrap="wrap"
-      className={classes.wrapper}
-    >
+      className={classes.wrapper}>
       <Grid
         container
         spacing={0}
         justifyContent="center"
         className={classes.grid}
-        alignItems="center"
-      >
+        alignItems="center">
         {children}
       </Grid>
     </Box>

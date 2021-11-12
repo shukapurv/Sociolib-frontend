@@ -75,8 +75,7 @@ export const BaseButton = (props) => {
       style={props.style}
       type={props.type}
       onFocus={props.onFocus}
-      className={`${classes.baseStyle} ${props.className}`}
-    >
+      className={`${classes.baseStyle} ${props.className}`}>
       {props.children}
     </button>
   );
@@ -123,8 +122,7 @@ export const SolidButton = (props) => {
       onClick={props.onClick}
       style={props.style}
       type={props.type}
-      className={classs.join(" ")}
-    >
+      className={classs.join(" ")}>
       {props.children}
     </BaseButton>
   );
@@ -138,8 +136,7 @@ export const NavigationLink = (props) => {
       className={classes.link}
       activeClassName={classes.linkActive}
       // isActive={active ? true : false}
-      exact
-    >
+      exact>
       {props.name}
     </Link>
   );

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Box } from "@material-ui/core";
+import axios from "axios";
 import { list } from "../../list";
 import Card from "./Card";
-import axios from "axios";
 
 const Books = () => {
   const [filterBooks, setFilterBooks] = useState(list);
@@ -11,7 +11,7 @@ const Books = () => {
     axios
       .get(`https://sociolib-api.herokuapp.com/library/books/`)
       .then((res) => {
-        console.log(res)
+        console.log(res);
         setFilterBooks(res.data);
       })
       .catch((err) => {

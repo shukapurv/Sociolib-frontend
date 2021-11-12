@@ -165,7 +165,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down(960)]: {
       display: "block",
     },
-  }
+  },
 }));
 
 const Headers = () => {
@@ -188,7 +188,9 @@ const Headers = () => {
   useEffect(() => {
     if (token) {
       axios
-        .get(`https://sociolib-api.herokuapp.com/auth/profile/`, { headers: { Authorization: "Token " + token } })
+        .get(`https://sociolib-api.herokuapp.com/auth/profile/`, {
+          headers: { Authorization: `Token ${token}` },
+        })
         .then((res) => {
           setUser(res.data);
         })
@@ -201,7 +203,7 @@ const Headers = () => {
     Cookie.remove("Token");
     setToken(null);
     router.push("/");
-  }
+  };
   return (
     <>
       <Head>
