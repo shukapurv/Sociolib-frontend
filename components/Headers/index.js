@@ -250,14 +250,14 @@ const Headers = () => {
                       Top Rated
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link href="/" onClick={() => setOpen(false)}>
                       Community
                     </Link>
-                  </li>
+                  </li> */}
                 </NavigationDropdown>
                 <li onClick={() => setOpen(false)}>
-                  <NavigationLink name="Write" to="/" />
+                  <NavigationLink name="Community" to="/users" />
                 </li>
                 <li className={`${classes.user}`}>
                   <Link href="/" onClick={() => setOpen(false)}>
