@@ -78,7 +78,7 @@ const Form = () => {
 
   const loginfunc = () => {
     axios
-      .post(`http://127.0.0.1:8000/auth/login/`, data)
+      .post(`https://sociolib-api.herokuapp.com/auth/login/`, data)
       .then((response) => {
         router.push("/");
         Cookie.set("Token", response.data.token);

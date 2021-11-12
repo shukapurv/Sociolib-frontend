@@ -8,7 +8,7 @@ const Card = (props) => {
         <div className="shadow-lg flex flex-wrap w-full lg:w-4/5 mx-auto">
           <div
             className="bg-cover bg-bottom border w-full md:w-1/3 h-64 md:h-auto relative"
-            style={{ backgroundImage: `url("http://127.0.0.1:8000${props.cover_image}")` }}>
+            style={{ backgroundImage: `url("https://sociolib-api.herokuapp.com${props.cover_image}")` }}>
             <div className="absolute text-xl">
               <i className="fa fa-heart text-white hover:text-red-light ml-4 mt-4 cursor-pointer" />
             </div>

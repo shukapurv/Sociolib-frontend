@@ -84,7 +84,7 @@ const Form = () => {
 
   const registerfunc = () => {
     axios
-      .post(`http://127.0.0.1:8000/auth/register/`, data)
+      .post(`https://sociolib-api.herokuapp.com/auth/register/`, data)
       .then((response) => {
         router.push("/");
         Cookie.set("Token", response.data.token);
@@ -124,7 +124,7 @@ const Form = () => {
           container
           justifyContent="center"
           alignItems="center"
-          // textAlign="center"
+        // textAlign="center"
         >
           <form
             className={classes.form}
