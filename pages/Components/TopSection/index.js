@@ -109,7 +109,8 @@ const TopSection = () => {
         alignItems="center"
         justifyContent="center"
         data-aos="fade-left"
-        data-aos-duration={800}>
+        data-aos-duration={800}
+      >
         <img src={HomeLanding} alt="Landing page image" className={classes.herosection__img} />
       </Grid>
     </HeroSection>

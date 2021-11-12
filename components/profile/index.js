@@ -124,7 +124,9 @@ const Index = () => {
       </section>
       <main className="main bg-gray-100 md:col-span-5">
         <div className="flex flex-wrap justify-center p-6">
-          <h1 className="font-serif mb-0 pb-0  text-center text-2xl text-gray-500">Books Reading</h1>
+          <h1 className="font-serif mb-0 pb-0  text-center text-2xl text-gray-500">
+            Books Reading
+          </h1>
         </div>
         <BooksReading />
       </main>

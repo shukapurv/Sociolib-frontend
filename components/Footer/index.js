@@ -88,7 +88,8 @@ const Footer = ({ green }) => {
                     href="https://www.facebook.com"
                     rel="noreferrer"
                     target="_blank"
-                    className={classes.social}>
+                    className={classes.social}
+                  >
                     <FacebookIcon />
                   </a>
                 </Box>
@@ -97,7 +98,8 @@ const Footer = ({ green }) => {
                     href="https://twitter.com"
                     rel="noreferrer"
                     target="_blank"
-                    className={classes.social}>
+                    className={classes.social}
+                  >
                     <TwitterIcon />
                   </a>
                 </Box>
@@ -106,7 +108,8 @@ const Footer = ({ green }) => {
                     href="https://www.linkedin.com"
                     rel="noreferrer"
                     target="_blank"
-                    className={classes.social}>
+                    className={classes.social}
+                  >
                     <LinkedInIcon />
                   </a>
                 </Box>
@@ -115,7 +118,8 @@ const Footer = ({ green }) => {
                     href="https://www.youtube.com"
                     rel="noreferrer"
                     target="_blank"
-                    className={classes.social}>
+                    className={classes.social}
+                  >
                     <YouTubeIcon />
                   </a>
                 </Box>

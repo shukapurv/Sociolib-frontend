@@ -185,7 +185,8 @@ const Headers = () => {
           scrolled
             ? `${classes.header} ${classes.navColored}`
             : `${classes.header} ${classes.navTransparent}`
-        }>
+        }
+      >
         <Container>
           <Grid container spacing={2} justifyContent="flex-start" alignItems="center">
             <Grid item xs={2}>
