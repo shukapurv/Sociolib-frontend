@@ -55,8 +55,7 @@ const HeroSection = ({ children, green }) => {
           spacing={0}
           className={classes.herosectionContents}
           alignItems="center"
-          justifyContent="center"
-        >
+          justifyContent="center">
           {children}
         </Grid>
       </WrapperFullVh>

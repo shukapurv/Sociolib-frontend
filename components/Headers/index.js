@@ -7,6 +7,8 @@ import Link from "next/link";
 import Head from "next/head";
 import Container from "@components/Container";
 import Cookie from "js-cookie";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const Logo = "/assets/images/logo.jpg";
 
@@ -153,13 +155,27 @@ const useStyles = makeStyles((theme) => ({
       background: theme.palette.primary.main,
     },
   },
+  profile: {
+    [theme.breakpoints.down(960)]: {
+      display: "none",
+    },
+  },
+  user: {
+    display: "none",
+    [theme.breakpoints.down(960)]: {
+      display: "block",
+    },
+  },
 }));
 
 const Headers = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState("");
+  const [token, setToken] = useState(Cookie.get("Token") || null);
   const headerRef = useRef(null);
   const classes = useStyles();
+  const router = useRouter();
 
   const scrollHandler = () => {
     window.scrollY > 0 ? setScrolled(true) : setScrolled(false);
@@ -169,6 +185,25 @@ const Headers = () => {
     window.scrollY > 0 ? setScrolled(true) : setScrolled(false);
     window.addEventListener("scroll", scrollHandler);
   }, []);
+  useEffect(() => {
+    if (token) {
+      axios
+        .get(`https://sociolib-api.herokuapp.com/auth/profile/`, {
+          headers: { Authorization: `Token ${token}` },
+        })
+        .then((res) => {
+          setUser(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }, [token]);
+  const handleLogout = () => {
+    Cookie.remove("Token");
+    setToken(null);
+    router.push("/");
+  };
   return (
     <>
       <Head>
@@ -185,8 +220,7 @@ const Headers = () => {
           scrolled
             ? `${classes.header} ${classes.navColored}`
             : `${classes.header} ${classes.navTransparent}`
-        }
-      >
+        }>
         <Container>
           <Grid container spacing={2} justifyContent="flex-start" alignItems="center">
             <Grid item xs={2}>
@@ -199,7 +233,7 @@ const Headers = () => {
                 </Link>
               </Box>
             </Grid>
-            <Grid item xs={8} container alignItems="center" justifyContent="flex-start">
+            <Grid item xs={7} container alignItems="center" justifyContent="flex-start">
               <ul className={`${classes.nav}  ${open ? classes.show : ""}`}>
                 <li onClick={() => setOpen(false)}>
                   <NavigationLink name="home" to="/" />
@@ -222,28 +256,43 @@ const Headers = () => {
                     </Link>
                   </li>
                 </NavigationDropdown>
-
                 <li onClick={() => setOpen(false)}>
                   <NavigationLink name="Write" to="/" />
                 </li>
+                <li className={`${classes.user}`}>
+                  <Link href="/" onClick={() => setOpen(false)}>
+                    View Profile
+                  </Link>
+                </li>
+                <li className={`${classes.user}`}>
+                  <Link href="/" onClick={() => setOpen(false)}>
+                    LOG OUT
+                  </Link>
+                </li>
               </ul>
             </Grid>
-            <Grid item xs={2} container alignItems="center" justifyContent="flex-end">
-              {Cookie.get("Token") ? (
-                <div className="rounded">
-                  <img
-                    className="object-cover relative rounded-full border
+            <Grid item xs={3} container alignItems="center" justifyContent="flex-end">
+              {token ? (
+                <div className="flex items-center gap-4">
+                  <div className="cursor-pointer" onClick={handleLogout}>
+                    <div className={classes.btn}>Log Out</div>
+                  </div>
+                  <div className={classes.profile}>
+                    <Link href={`/profile/${user.username}`}>
+                      <div className="rounded cursor-pointer">
+                        <img
+                          className="object-cover relative rounded-full border
         border-gray-100 shadow-sm
    h-12 w-12"
-                    src="https://images.unsplash.com/photo-1636373590511-e4c18b2d6167?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0Mnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                  />
+                          src={`https://sociolib-api.herokuapp.com${user.profile_image}`}
+                        />
+                      </div>
+                    </Link>
+                  </div>
                 </div>
               ) : (
                 <Link href="/login">
                   <div className="cursor-pointer">
-                    <span onClick={() => setOpen(!open)} className={`${classes.toggler}`}>
-                      <MenuRoundedIcon style={{ fontSize: "35px" }} />
-                    </span>
                     <div className={classes.btn}>Sign In</div>
                   </div>
                 </Link>
