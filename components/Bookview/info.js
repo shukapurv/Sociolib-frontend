@@ -1,13 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactStars from "react-rating-stars-component";
+import axios from "axios";
+import Cookie from "js-cookie";
 
 const Info = (props) => {
-  const firstExample = {
-    size: 30,
-    edit: false,
-    value: props.rating,
+  console.log(props);
+  const [is_owned, setIsowned] = useState(false);
+
+  React.useEffect(() => {
+    axios
+      .get(`https://sociolib-api.herokuapp.com/auth/profile/`, {
+        headers: {
+          Authorization: `Token ${Cookie.get("Token")}`,
+        },
+      })
+      .then((res) => {
+        const arr = res.data.books;
+        let i = res.data.books.length;
+        while (i--) {
+          if (arr[i].id == props.id) {
+            setIsowned(true);
+          }
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  const issueFunc = () => {
+    if (is_owned) {
+      alert("Already issued");
+    } else {
+      axios
+        .post(`https://sociolib-api.herokuapp.com/library/issue/${props.id}/`, {
+          headers: {
+            Authorization: `Token ${Cookie.get("Token")}`,
+          },
+        })
+        .then((res) => {
+          alert("Book issued");
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   };
-  console.log(props.rating);
+
   return (
     <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">
@@ -43,10 +82,12 @@ const Info = (props) => {
             </div>
             <div className="flex">
               <span className="title-font font-medium text-2xl text-gray-900">₹{props.price}</span>
+              {}
               <button
+                onClick={issueFunc}
                 type="button"
                 className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-                Order
+                Issue
               </button>
               <button
                 type="button"
