@@ -1,21 +1,42 @@
 import React, { useState } from "react";
 import { Box } from "@material-ui/core";
+import axios from "axios";
+import Cookie from "js-cookie";
 import { list } from "../../list";
 import User from "./user";
 
 const index = () => {
-  const [filterUsers, setFilterUsers] = useState(list);
+  const [filterUsers, setFilterUsers] = useState([]);
   const [searchKey, setSearchKey] = useState("");
+  const [allUsers, setAllUsers] = useState([]);
+
+  React.useEffect(() => {
+    axios
+      .get(`https://sociolib-api.herokuapp.com/auth/community/`, {
+        headers: {
+          Authorization: `Token ${Cookie.get("Token")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setFilterUsers(res.data);
+        setAllUsers(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   React.useEffect(() => {
     let result;
-    if (searchKey.length === 0) result = list;
-    else {
-      result = list.filter((data) => {
-        return data.title.search(searchKey) !== -1;
+    if (searchKey.length !== 0) {
+      result = filterUsers.filter((data) => {
+        return data.username.search(searchKey) !== -1;
       });
+      setFilterUsers(result);
+    } else {
+      setFilterUsers(allUsers);
     }
-    setFilterUsers(result);
   }, [searchKey]);
 
   return (
@@ -74,7 +95,7 @@ const index = () => {
           <ul className="grid gap-10 row-gap-8 mx-auto sm:row-gap-10 lg:max-w-screen-lg sm:grid-cols-2 lg:grid-cols-3">
             {filterUsers.map((a) => (
               <li key={a.id}>
-                <User />
+                <User {...a} />
               </li>
             ))}
           </ul>

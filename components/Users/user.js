@@ -1,6 +1,6 @@
 import React from "react";
 
-const user = () => {
+const user = (props) => {
   return (
     <div>
       <div className="flex">
@@ -10,8 +10,8 @@ const user = () => {
           alt="Person"
         />
         <div className="flex flex-col justify-center">
-          <p className="text-lg font-bold">Oliver Aguilerra</p>
-          <p className="text-sm text-gray-800">Product Manager</p>
+          <p className="text-lg font-bold">{props.username}</p>
+          <p className="text-sm text-gray-800">{props.email}</p>
         </div>
       </div>
     </div>
