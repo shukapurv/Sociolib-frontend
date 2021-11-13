@@ -16,7 +16,7 @@ const Profile = () => {
         <meta name="keywords" content="  " />
       </Helmet>
       <Headers />
-      <BookView />
+      <BookView id={router.query.id} />
       <Footer />
     </>
   );

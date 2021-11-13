@@ -2,6 +2,8 @@ import React from "react";
 import { Box, makeStyles } from "@material-ui/core";
 
 const Card = (props) => {
+  console.log(props);
+  const str = `/book/${props.id}`;
   return (
     <>
       <div className="container mt-20 mx-auto p-4 md:p-0">
@@ -35,7 +37,7 @@ const Card = (props) => {
                   <button
                     type="button"
                     className="bg-white hover:bg-grey-darker hover:text-white border border-solid border-grey w-1/3 lg:w-full py-2">
-                    Open
+                    <a href={str}>Open</a>
                   </button>
                 </div>
               </div>

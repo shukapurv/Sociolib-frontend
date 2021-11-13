@@ -1,6 +1,12 @@
 import React from "react";
+import ReactStars from "react-rating-stars-component";
 
 const reviews = (props) => {
+  const firstExample = {
+    size: 30,
+    value: props.rating,
+    edit: false,
+  };
   return (
     <body>
       <section className="font-sans container m-auto max-w-xxl py-8">
@@ -13,23 +19,20 @@ const reviews = (props) => {
           </div>
           <div className="w-100">
             <div className="flex justify-between">
-              <div>
+              <div className="flex">
                 <span className="font-bold">
                   <a href="#" className="text-black">
-                    Natalie Rushman
+                    {props.user.first_name}
                   </a>
                 </span>
-                <span className="text-gray-700">@natalie</span>
-                <span className="text-gray-700">·</span>
-                <span className="text-gray-700">May 26</span>
+                <span className="text-gray-700">@{props.user.username}</span>
+                <span className="ml-20">
+                  <ReactStars {...firstExample} />
+                </span>
               </div>
             </div>
             <div className="">
-              <p className="my-3 text-sm">
-                Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                default model text, and a search for 'lorem ipsum' will uncover many web sites still
-                in their infancy.
-              </p>
+              <p className="my-3 text-sm">{props.comment}</p>
               <hr className="border-b border-gray-400" />
             </div>
           </div>
