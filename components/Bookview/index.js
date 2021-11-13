@@ -38,7 +38,7 @@ const index = (props) => {
             Create review
           </h1>
           <div className="mt-3 pt-7 w-full">
-            <Feedback />
+            <Feedback {...bookDetail} />
           </div>
         </div>
       </div>
