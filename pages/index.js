@@ -2,6 +2,7 @@ import { Box, makeStyles } from "@material-ui/core";
 import { Helmet } from "react-helmet";
 import Footer from "@components/Footer";
 import Headers from "@components/Headers";
+import ContactUs from "@components/ContactUs";
 import Perks from "./Components/Perks";
 import ReviewsSection from "./Components/ReviewsSection";
 import TopSection from "./Components/TopSection";
@@ -20,6 +21,7 @@ export default function Home() {
       <Perks />
       <WhySociolib />
       <ReviewsSection />
+      <ContactUs />
       <Footer />
     </Box>
   );
