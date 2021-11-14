@@ -46,13 +46,12 @@ const Profile = () => {
       if (user && activeUser && user.username === activeUser.username) setSelf(true);
       else {
         axios
-          .get(
-            `https://sociolib-api.herokuapp.com/friends/${user.id}/`,
-            { headers: { Authorization: `Token ${token}` } },
-          )
+          .get(`https://sociolib-api.herokuapp.com/friends/${user.id}/`, {
+            headers: { Authorization: `Token ${token}` },
+          })
           .then((res) => {
-            console.log(res)
-            setFriendData(res.data)
+            console.log(res);
+            setFriendData(res.data);
           })
           .catch((err) => {
             console.error(err);

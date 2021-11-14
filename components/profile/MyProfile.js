@@ -2,38 +2,37 @@ import React from "react";
 import "react-multi-carousel/lib/styles.css";
 
 const MyProfile = ({ user }) => {
-    return <>
-        <h1 className="text-3xl pl-32 pb-4"> Personal Info </h1>
-        <div className="sidebar mb-16">
-            <div className="profile-info">
-                <p className="key">First Name : </p>
-                <p className="value">{user.first_name}</p>
-            </div>
-            <div className="profile-info">
-                <p className="key">Last Name : </p>
-                <p className="value">{user.last_name}</p>
-            </div>
-            <div className="profile-info">
-                <p className="key" >Email : </p>
-                <p className="value" >{user.email}</p>
-            </div>
+  return (
+    <>
+      <h1 className="text-3xl pl-32 pb-4"> Personal Info </h1>
+      <div className="sidebar mb-16">
+        <div className="profile-info">
+          <p className="key">First Name : </p>
+          <p className="value">{user.first_name}</p>
+        </div>
+        <div className="profile-info">
+          <p className="key">Last Name : </p>
+          <p className="value">{user.last_name}</p>
+        </div>
+        <div className="profile-info">
+          <p className="key">Email : </p>
+          <p className="value">{user.email}</p>
+        </div>
 
-            <div className="profile-info">
-                <p className="key" >Hobbies : </p>
-                <p className="value" >
-                    {user.interests}
-                </p>
-            </div>
+        <div className="profile-info">
+          <p className="key">Hobbies : </p>
+          <p className="value">{user.interests}</p>
         </div>
-        <div className="content">
-            <div className="work-experience p-10">
-                <h1 className="text-3xl"> About Me </h1>
-                <div className="info">
-                    <p>{user.about_me}</p>
-                </div>
-            </div>
+      </div>
+      <div className="content">
+        <div className="work-experience p-10">
+          <h1 className="text-3xl"> About Me </h1>
+          <div className="info">
+            <p>{user.about_me}</p>
+          </div>
         </div>
-        <style>{`
+      </div>
+      <style>{`
             .sidebar {
                 width:60%;
                 margin-left: 10%;
@@ -77,7 +76,8 @@ const MyProfile = ({ user }) => {
             }
 
         `}</style>
-    </>;
+    </>
+  );
 };
 
 export default MyProfile;

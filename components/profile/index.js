@@ -8,10 +8,10 @@ import { Box, makeStyles, useTheme } from "@material-ui/core";
 import Paragraph from "@components/Paragraph";
 import Card from "@components/Booklist/Card";
 import Heading2 from "@components/Heading2";
+import axios from "axios";
 import MyProfile from "./MyProfile";
 import MyFriends from "./MyFriends";
 import PendingRequests from "./PendingRequests";
-import axios from "axios";
 import BooksReading from "./BooksReading";
 
 const useStyles = makeStyles((theme) => ({
@@ -57,14 +57,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const Index = ({ self, user, friendData, token }) => {
   const classes = useStyles();
   const router = useRouter();
   const theme = useTheme();
   const MenuList = ["Profile", "Books", "Friends"];
   const [option, setOption] = useState("Profile");
-  const [requestSent, setRequestSent] = useState(friendData.request_sent)
+  const [requestSent, setRequestSent] = useState(friendData.request_sent);
 
   const handleRequest = () => {
     axios
@@ -74,13 +73,13 @@ const Index = ({ self, user, friendData, token }) => {
         { headers: { Authorization: `Token ${token}` } },
       )
       .then((res) => {
-        console.log(res)
+        console.log(res);
         setRequestSent(true);
       })
       .catch((err) => {
         console.error(err);
       });
-  }
+  };
   const handleCancel = () => {
     axios
       .patch(
@@ -89,13 +88,13 @@ const Index = ({ self, user, friendData, token }) => {
         { headers: { Authorization: `Token ${token}` } },
       )
       .then((res) => {
-        console.log(res)
+        console.log(res);
         setRequestSent(false);
       })
       .catch((err) => {
         console.error(err);
       });
-  }
+  };
   return (
     <div className="mt-20 md:h-full md:grid md:grid-cols-6">
       <section className="md:col-span-1 border-r-3 border-r-gray">
@@ -121,8 +120,9 @@ const Index = ({ self, user, friendData, token }) => {
           {MenuList.map((sub) => {
             return (
               <div
-                className={`cursor-pointer flex justify-center rounded-xl p-4 text-md ${option === sub && "text-blue-700 bg-green-500 bg-opacity-10"
-                  }`}
+                className={`cursor-pointer flex justify-center rounded-xl p-4 text-md ${
+                  option === sub && "text-blue-700 bg-green-500 bg-opacity-10"
+                }`}
                 onClick={() => setOption(sub)}
                 role="presentation"
                 key={sub}>
@@ -130,27 +130,42 @@ const Index = ({ self, user, friendData, token }) => {
               </div>
             );
           })}
-          {self && <div
-            className={`cursor-pointer flex justify-center rounded-xl p-4 text-md ${option === "Pending Requests" && "text-blue-700 bg-green-500 bg-opacity-10"
+          {self && (
+            <div
+              className={`cursor-pointer flex justify-center rounded-xl p-4 text-md ${
+                option === "Pending Requests" && "text-blue-700 bg-green-500 bg-opacity-10"
               }`}
-            onClick={() => setOption("Pending Requests")}
-            role="presentation"
-            key={"Pending Requests"}>
-            Pending Requests
-          </div>}
+              onClick={() => setOption("Pending Requests")}
+              role="presentation"
+              key="Pending Requests">
+              Pending Requests
+            </div>
+          )}
           {!self && !friendData.is_friend && !requestSent && (
-            <div className="cursor-pointer flex justify-center items-center py-10" onClick={handleRequest}>
+            <div
+              className="cursor-pointer flex justify-center items-center py-10"
+              onClick={handleRequest}>
               <div className={`${classes.btn} w-2/3 `}>Add Friend</div>
             </div>
           )}
-          {requestSent && <div className="cursor-pointer flex justify-center items-center py-10" onClick={handleCancel}>
-            <div className={`${classes.btn} `}>Cancel Request</div>
-          </div>}
-          {friendData.is_friend && <div className="cursor-pointer flex justify-center items-center py-10" onClick={handleCancel}>
-            <div className={`${classes.btn} w-2/3 `}>CHAT</div>
-          </div>}
+          {requestSent && (
+            <div
+              className="cursor-pointer flex justify-center items-center py-10"
+              onClick={handleCancel}>
+              <div className={`${classes.btn} `}>Cancel Request</div>
+            </div>
+          )}
+          {friendData.is_friend && (
+            <div
+              className="cursor-pointer flex justify-center items-center py-10"
+              onClick={handleCancel}>
+              <div className={`${classes.btn} w-2/3 `}>CHAT</div>
+            </div>
+          )}
         </div>
-        <h1 className="font-serif mb-0 pb-0 mt-8 text-center text-2xl text-gray-500">Follow {self ? "Me" : `${user.first_name}`}</h1>
+        <h1 className="font-serif mb-0 pb-0 mt-8 text-center text-2xl text-gray-500">
+          Follow {self ? "Me" : `${user.first_name}`}
+        </h1>
         <hr />
         <div className="flex flex-wrap justify-center">
           <Box mb={1}>
