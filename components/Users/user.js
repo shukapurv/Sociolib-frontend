@@ -8,7 +8,7 @@ const user = (props) => {
     <div>
       <div className="flex">
         <img className="object-cover w-20 h-20 mr-4 rounded-full shadow" src={image} alt="Person" />
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center cursor-pointer">
           <Link href={`/profile/${props.username}`}>
             <div className="text-lg font-bold">{props.username}</div>
           </Link>
