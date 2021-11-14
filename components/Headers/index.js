@@ -9,6 +9,7 @@ import Container from "@components/Container";
 import Cookie from "js-cookie";
 import axios from "axios";
 import { useRouter } from "next/router";
+const credit = "/assets/images/credit.png";
 
 const Logo = "/assets/images/logo.jpg";
 
@@ -141,7 +142,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down(960)]: {
       display: "none",
     },
-
+    cursor: "pointer",
     textDecoration: "none",
     textTransform: "uppercase",
     color: theme.palette.primary.main,
@@ -165,6 +166,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down(960)]: {
       display: "block",
     },
+  },
+  personImg: {
+    width: "25px",
+    marginLeft: "10px",
   },
 }));
 
@@ -233,7 +238,7 @@ const Headers = () => {
                 </Link>
               </Box>
             </Grid>
-            <Grid item xs={7} container alignItems="center" justifyContent="flex-start">
+            <Grid item xs={6} container alignItems="center" justifyContent="flex-start">
               <ul className={`${classes.nav}  ${open ? classes.show : ""}`}>
                 <li onClick={() => setOpen(false)}>
                   <NavigationLink name="home" to="/" />
@@ -244,7 +249,6 @@ const Headers = () => {
                       All Books
                     </Link>
                   </li>
-
                   <li>
                     <Link href="/" onClick={() => setOpen(false)}>
                       Top Rated
@@ -271,15 +275,15 @@ const Headers = () => {
                 </li>
               </ul>
             </Grid>
-            <Grid item xs={3} container alignItems="center" justifyContent="flex-end">
+            <Grid item xs={4} container alignItems="center" justifyContent="flex-end">
               {token ? (
-                <div className="flex items-center gap-4">
-                  <div className="cursor-pointer" onClick={handleLogout}>
-                    <div className={classes.btn}>Log Out</div>
-                  </div>
-                  <div className={classes.profile}>
-                    <Link href={`/profile/${user.username}`}>
-                      <div className="rounded cursor-pointer">
+                <ul className={`${classes.nav}  ${open ? classes.show : ""}`}>
+                  <li className={classes.btn} onClick={handleLogout}>Log Out</li>
+                  <li><img src={credit} alt="credit" className={classes.personImg} /></li>
+                  <li className="text-gray-500 pl-1">{user.credit}</li>
+                  <li>
+                    <Link href={`/profile/anony`}>
+                      <div className={`rounded pl-2 cursor-pointer ${classes.profile}`}>
                         <img
                           className="object-cover relative rounded-full border
         border-gray-100 shadow-sm
@@ -288,8 +292,8 @@ const Headers = () => {
                         />
                       </div>
                     </Link>
-                  </div>
-                </div>
+                  </li>
+                </ul>
               ) : (
                 <Link href="/login">
                   <div className="cursor-pointer">
