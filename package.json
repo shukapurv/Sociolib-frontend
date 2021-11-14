@@ -9,7 +9,8 @@
     "lint": "prettier --check .",
     "pretest": "./node_modules/.bin/eslint --ignore-path .gitignore . --fix",
     "check-format": "prettier --check .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "export":"next export"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
