@@ -23,15 +23,15 @@ const Card = (props) => {
         </header>
 
         <footer className="flex items-center justify-between leading-none p-2 md:p-4">
-          <Link
-            href={`/book/${props.id}`}
-            className="flex items-center no-underline hover:underline text-black">
-            <img
-              alt="Placeholder"
-              className="block rounded-full"
-              src="https://picsum.photos/32/32/?write"
-            />
-            <p className="ml-2 text-sm">{props.author}</p>
+          <Link href={`/book/${props.id}`}>
+            <div className="flex items-center no-underline hover:underline text-black">
+              <img
+                alt="Placeholder"
+                className="block rounded-full"
+                src="https://picsum.photos/32/32/?write"
+              />
+              <p className="ml-2 text-sm">{props.author}</p>
+            </div>
           </Link>
         </footer>
       </article>
