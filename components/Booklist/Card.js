@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, makeStyles } from "@material-ui/core";
+import Link from "next/link";
 
 const Card = (props) => {
   console.log(props);
@@ -22,14 +23,22 @@ const Card = (props) => {
         </header>
 
         <footer className="flex items-center justify-between leading-none p-2 md:p-4">
-          <a className="flex items-center no-underline hover:underline text-black" href="#">
-            <img
-              alt="Placeholder"
-              className="block rounded-full"
-              src="https://picsum.photos/32/32/?write"
-            />
-            <p className="ml-2 text-sm">{props.author}</p>
-          </a>
+          <Link
+            href={`/book/${props.id}`}
+            flex
+            items-center
+            no-underline
+            hover:underline
+            text-black>
+            <div className="text-lg font-bold">
+              <img
+                alt="Placeholder"
+                className="block rounded-full"
+                src="https://picsum.photos/32/32/?write"
+              />
+              <p className="ml-2 text-sm">{props.author}</p>
+            </div>
+          </Link>
         </footer>
       </article>
     </>
