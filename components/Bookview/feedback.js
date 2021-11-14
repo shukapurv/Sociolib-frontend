@@ -19,11 +19,18 @@ const Feedback = (props) => {
   const [comment, setComment] = useState("");
   const submit = () => {
     axios
-      .post(`https://sociolib-api.herokuapp.com/library/review/${props.id}/`, {
-        headers: {
-          Authorization: `Token ${Cookie.get("Token")}`,
+      .post(
+        `https://sociolib-api.herokuapp.com/library/review/${props.id}/`,
+        {
+        comment:comment,
+        rating:rating 
         },
-      })
+        {
+          headers: {
+            Authorization: `Token ${Cookie.get("Token")}`,
+          },
+        },
+      )
       .then((res) => {
         console.log(res);
         alert("Added comment");
