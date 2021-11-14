@@ -58,7 +58,7 @@ const Profile = () => {
           });
       }
     }
-  }, [token]);
+  }, [token,user]);
   useEffect(() => {
     if (user && activeUser && user.username === activeUser.username) setSelf(true);
   }, [user, activeUser]);

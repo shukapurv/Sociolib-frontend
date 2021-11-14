@@ -55,13 +55,15 @@ const Books = () => {
         </div>
       </Box>
       <Box mt={2}>
-        <ul>
-          {filterBooks.map((a) => (
-            <li key={a.id}>
-              <Card {...a} />
-            </li>
-          ))}
-        </ul>
+        <div className="container my-12 mx-auto px-4 md:px-12">
+          <ul className="flex flex-wrap -mx-1 lg:-mx-4">
+            {filterBooks.map((a) => (
+              <li key={a.id} className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+                <Card {...a} />
+              </li>
+            ))}
+          </ul>
+        </div>
       </Box>
     </>
   );

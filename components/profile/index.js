@@ -159,7 +159,7 @@ const Index = ({ self, user, friendData, token }) => {
             <div
               className="cursor-pointer flex justify-center items-center py-10"
               onClick={handleCancel}>
-              <div className={`${classes.btn} w-2/3 `}>CHAT</div>
+              <div className={`${classes.btn} `}>CHAT</div>
             </div>
           )}
         </div>
