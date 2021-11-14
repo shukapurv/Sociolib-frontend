@@ -11,8 +11,8 @@ import RightArrow from "./RightArrow";
 import LeftArrow from "./LeftArrow";
 
 const Person1 = "/assets/images/Sari.jpeg";
-const Person2 = "/assets/images/1.svg/shubh.jpeg";
-const Person3 = "/assets/images/3.svg/vivek.jpeg";
+const Person2 = "/assets/images/shubh.jpeg";
+const Person3 = "/assets/images/vivek.jpeg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
