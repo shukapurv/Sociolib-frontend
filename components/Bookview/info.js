@@ -4,6 +4,7 @@ import axios from "axios";
 import Cookie from "js-cookie";
 
 const Info = (props) => {
+  const image = `https://sociolib-api.herokuapp.com${props.cover_image}`;
   console.log(props);
   const [is_owned, setIsowned] = useState(false);
 
@@ -33,11 +34,15 @@ const Info = (props) => {
       alert("Already issued");
     } else {
       axios
-        .post(`https://sociolib-api.herokuapp.com/library/issue/${props.id}/`, {
-          headers: {
-            Authorization: `Token ${Cookie.get("Token")}`,
+        .post(
+          `https://sociolib-api.herokuapp.com/library/issue/${props.id}/`,
+          {},
+          {
+            headers: {
+              Authorization: `Token ${Cookie.get("Token")}`,
+            },
           },
-        })
+        )
         .then((res) => {
           alert("Book issued");
         })
@@ -54,7 +59,7 @@ const Info = (props) => {
           <img
             alt="ecommerce"
             className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-            src="https://cf.shopee.com.my/file/5de801e0265fed61c2477611191b83c5"
+            src={image}
           />
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <h2 className="text-sm title-font text-gray-500 tracking-widest">BOOK NAME</h2>
