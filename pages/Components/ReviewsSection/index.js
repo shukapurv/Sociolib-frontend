@@ -10,9 +10,9 @@ import Reviews from "@components/Reviews";
 import RightArrow from "./RightArrow";
 import LeftArrow from "./LeftArrow";
 
-const Person1 = "/assets/images/1.svg";
-const Person2 = "/assets/images/1.svg";
-const Person3 = "/assets/images/3.svg";
+const Person1 = "/assets/images/Sari.jpeg";
+const Person2 = "/assets/images/1.svg/shubh.jpeg";
+const Person3 = "/assets/images/3.svg/vivek.jpeg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,18 +57,14 @@ const ReviewsSection = () => {
 
           <Container data-aos="fade-up" data-aos-duration={600}>
             <Slider {...settings}>
+              <Reviews text="Really a great site" img={Person1} name="Saritesh" />
               <Reviews
-                text="lorem ipsum dolor sit amet, consectet loren ipsum dolor sit amet lorem ipsum dolor sit amet, consectet loren ipsum dolor sit amet"
-                img={Person1}
-                name="Saritesh"
-              />
-              <Reviews
-                text="lorem ipsum dolor sit amet, consectet loren ipsum dolor sit amet lorem ipsum dolor sit amet, consectet loren ipsum dolor sit amet"
+                text="Great place to get all books you want to read together with friends feature. Awesome!!"
                 img={Person2}
                 name="Shubhankar"
               />
               <Reviews
-                text="lorem ipsum dolor sit amet, consectet loren ipsum dolor sit amet"
+                text="Contributors are really hard-working. The site is awesome"
                 img={Person3}
                 name="Vivek"
               />
