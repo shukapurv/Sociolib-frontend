@@ -282,7 +282,7 @@ const Headers = () => {
                   <li><img src={credit} alt="credit" className={classes.personImg} /></li>
                   <li className="text-gray-500 pl-1">{user.credit}</li>
                   <li>
-                    <Link href={`/profile/anony`}>
+                    <Link href={`/profile/${user.username}`}>
                       <div className={`rounded pl-2 cursor-pointer ${classes.profile}`}>
                         <img
                           className="object-cover relative rounded-full border

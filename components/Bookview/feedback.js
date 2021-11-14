@@ -22,8 +22,8 @@ const Feedback = (props) => {
       .post(
         `https://sociolib-api.herokuapp.com/library/review/${props.id}/`,
         {
-        comment:comment,
-        rating:rating 
+          comment: comment,
+          rating: rating
         },
         {
           headers: {
@@ -32,7 +32,8 @@ const Feedback = (props) => {
         },
       )
       .then((res) => {
-        console.log(res);
+        let num = props.step
+        props.setStep(++num)
         alert("Added comment");
       })
       .catch((err) => {

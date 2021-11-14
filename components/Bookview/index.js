@@ -11,7 +11,7 @@ const index = (props) => {
 
   const router = useRouter();
   const [bookDetail, setbookDetail] = useState({});
-
+  const [step, setStep] = useState(0)
   React.useEffect(() => {
     axios
       .get(`https://sociolib-api.herokuapp.com/library/book/${props.id}`, {
@@ -26,7 +26,7 @@ const index = (props) => {
       .catch((err) => {
         console.error(err);
       });
-  }, [props]);
+  }, [props, step]);
 
   return (
     <div>
@@ -38,7 +38,7 @@ const index = (props) => {
             Create review
           </h1>
           <div className="mt-3 pt-7 w-full">
-            <Feedback {...bookDetail} />
+            <Feedback {...bookDetail} setStep={setStep} step={step} />
           </div>
         </div>
       </div>
