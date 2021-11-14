@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import YouTubeIcon from "@material-ui/icons/YouTube";
-import { Box, makeStyles } from "@material-ui/core";
-import BooksOwned from "./BooksOwned";
+import { Box, makeStyles, useTheme } from "@material-ui/core";
+import Paragraph from "@components/Paragraph";
+import Card from "@components/Booklist/Card";
+import Heading2 from "@components/Heading2";
+import axios from "axios";
+import MyProfile from "./MyProfile";
+import MyFriends from "./MyFriends";
+import PendingRequests from "./PendingRequests";
 import BooksReading from "./BooksReading";
 
 const useStyles = makeStyles((theme) => ({
-  logo: {
-    // filter: "brightness(10000%)",
-    width: "150px",
-    borderRadius: "50%",
-  },
   social: {
     color: theme.palette.para.dark,
     transition: "all .3s ease",
@@ -31,38 +32,140 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: "0.25px",
     wordBreak: "break-word",
   },
+  subtitle: {
+    textTransform: "capitalize",
+    fontSize: "30px",
+    // fontWeight: "500",
+    fontFamily: "Squada One, cursive",
+  },
+  menu: {
+    height: "420px",
+  },
+  btn: {
+    textDecoration: "none",
+    textTransform: "uppercase",
+    color: "#fa252d",
+    padding: "15px 20px",
+    border: `1px solid #fa252d`,
+    borderRadius: "500px",
+    transition: "all .2s ease-in",
+
+    "&:hover": {
+      color: "#fff",
+      background: "#f23a40",
+    },
+  },
 }));
 
-const Index = () => {
+const Index = ({ self, user, friendData, token }) => {
   const classes = useStyles();
   const router = useRouter();
+  const theme = useTheme();
+  const MenuList = ["Profile", "Books", "Friends"];
+  const [option, setOption] = useState("Profile");
+  const [requestSent, setRequestSent] = useState(friendData.request_sent);
+
+  const handleRequest = () => {
+    axios
+      .post(
+        `https://sociolib-api.herokuapp.com/friends/${user.id}/`,
+        {},
+        { headers: { Authorization: `Token ${token}` } },
+      )
+      .then((res) => {
+        console.log(res);
+        setRequestSent(true);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  const handleCancel = () => {
+    axios
+      .patch(
+        `https://sociolib-api.herokuapp.com/friends/${user.id}/`,
+        {},
+        { headers: { Authorization: `Token ${token}` } },
+      )
+      .then((res) => {
+        console.log(res);
+        setRequestSent(false);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
   return (
-    <div className="border-t border-gray-600 inline-block mt-20 parent md:h-screen md:grid md:grid-cols-6">
-      <section className="sidebar md:col-span-1 border-r-3 border-r-gray">
+    <div className="mt-20 md:h-full md:grid md:grid-cols-6">
+      <section className="md:col-span-1 border-r-3 border-r-gray">
         <div className="flex flex-wrap justify-center">
           <div className="p-5">
             <img
-              src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-4-470x470.png"
+              src={`https://sociolib-api.herokuapp.com${user.profile_image}`}
               alt="..."
-              className="shadow-lg rounded-full max-w-full h-auto align-middle border-none"
+              className="shadow-lg rounded-full max-w-full h-40 align-middle border-none"
             />
           </div>
         </div>
-        <div className="flex flex-wrap justify-center">
-          <h1 className="font-serif text-2xl bg-clip-text ">@{router.query.username}</h1>
+        <div className="flex justify-center items-center pb-2">
+          <Heading2 className={classes.subtitle}>
+            {user.first_name} {user.last_name}
+          </Heading2>
         </div>
-        <div className="flex flex-wrap justify-center">
-          <p className="text-base text-gray-400 font-normal">Graphic Designer</p>
+        <div className="flex justify-center items-center pb-6">
+          <Paragraph>@{router.query.username}</Paragraph>
         </div>
-        <h1 className="font-serif mb-0 pb-0 mt-8 text-center text-2xl text-gray-500">About me</h1>
-        <div className="flex flex-wrap justify-center p-6 bg-white rounded shadow border">
-          <p className="text-base leading-relaxed text-gray-500 font-normal text-center">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua.
-          </p>
+        <hr />
+        <div className={`text-gray-700 mt-4 w-60 py-6 pl-10 ${classes.menu}`}>
+          {MenuList.map((sub) => {
+            return (
+              <div
+                className={`cursor-pointer flex justify-center rounded-xl p-4 text-md ${
+                  option === sub && "text-blue-700 bg-green-500 bg-opacity-10"
+                }`}
+                onClick={() => setOption(sub)}
+                role="presentation"
+                key={sub}>
+                {self ? "My" : `${user.first_name}'s`} {sub}
+              </div>
+            );
+          })}
+          {self && (
+            <div
+              className={`cursor-pointer flex justify-center rounded-xl p-4 text-md ${
+                option === "Pending Requests" && "text-blue-700 bg-green-500 bg-opacity-10"
+              }`}
+              onClick={() => setOption("Pending Requests")}
+              role="presentation"
+              key="Pending Requests">
+              Pending Requests
+            </div>
+          )}
+          {!self && !friendData.is_friend && !requestSent && (
+            <div
+              className="cursor-pointer flex justify-center items-center py-10"
+              onClick={handleRequest}>
+              <div className={`${classes.btn} w-2/3 `}>Add Friend</div>
+            </div>
+          )}
+          {requestSent && (
+            <div
+              className="cursor-pointer flex justify-center items-center py-10"
+              onClick={handleCancel}>
+              <div className={`${classes.btn} `}>Cancel Request</div>
+            </div>
+          )}
+          {friendData.is_friend && (
+            <div
+              className="cursor-pointer flex justify-center items-center py-10"
+              onClick={handleCancel}>
+              <div className={`${classes.btn} w-2/3 `}>CHAT</div>
+            </div>
+          )}
         </div>
-
-        <h1 className="font-serif mb-0 pb-0 mt-8 text-center text-2xl text-gray-500">Follow me</h1>
+        <h1 className="font-serif mb-0 pb-0 mt-8 text-center text-2xl text-gray-500">
+          Follow {self ? "Me" : `${user.first_name}`}
+        </h1>
         <hr />
         <div className="flex flex-wrap justify-center">
           <Box mb={1}>
@@ -106,29 +209,23 @@ const Index = () => {
             </Box>
           </Box>
         </div>
-        <hr />
-
-        <h1 className="font-serif mb-0 pb-0 mt-8 text-center text-2xl text-gray-500">Interests</h1>
-
-        <div className="flex flex-wrap justify-center p-6 bg-white rounded shadow border ">
-          <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-gray-200 uppercase last:mr-0 mr-1">
-            Romance
-          </span>
-          <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-gray-200 uppercase last:mr-0 mr-1">
-            Adventure
-          </span>
-          <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-gray-200 uppercase last:mr-0 mr-1">
-            Spiritual
-          </span>
-        </div>
       </section>
-      <main className="main bg-gray-100 md:col-span-5">
-        <div className="flex flex-wrap justify-center p-6">
-          <h1 className="font-serif mb-0 pb-0  text-center text-2xl text-gray-500">
-            Books Reading
-          </h1>
-        </div>
-        <BooksReading />
+      <main className="main bg-gray-100 md:col-span-5 p-20">
+        {option === "Books" && (
+          <Box mt={2}>
+            <ul>
+              {user.books.map((a) => (
+                <li key={a.id}>
+                  <Card {...a} />
+                </li>
+              ))}
+            </ul>
+          </Box>
+        )}
+        {option === "Friends" && <MyFriends token={token} username={user.username} />}
+        {option === "Profile" && <MyProfile user={user} />}
+
+        {self && option === "Pending Requests" && <PendingRequests token={token} />}
       </main>
     </div>
   );
