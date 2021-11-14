@@ -4,7 +4,7 @@ import { Box, makeStyles } from "@material-ui/core";
 const Card = (props) => {
   console.log(props);
   const str = `/book/${props.id}`;
-  const route = `http://localhost:3000/book/${props.id}`;
+  const route = `https://sociolib.netlify.app/book/${props.id}`;
   const image = `https://sociolib-api.herokuapp.com${props.cover_image}`;
   return (
     <>

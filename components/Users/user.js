@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const user = (props) => {
   const image = `https://sociolib-api.herokuapp.com${props.profile_image}`;
-  const route = `http://localhost:3000/profile/${props.username}`;
+  const route = `https://sociolib.netlify.app/profile/${props.username}`;
   return (
     <div>
       <div className="flex">
