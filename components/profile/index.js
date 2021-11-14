@@ -120,9 +120,8 @@ const Index = ({ self, user, friendData, token }) => {
           {MenuList.map((sub) => {
             return (
               <div
-                className={`cursor-pointer flex justify-center rounded-xl p-4 text-md ${
-                  option === sub && "text-blue-700 bg-green-500 bg-opacity-10"
-                }`}
+                className={`cursor-pointer flex justify-center rounded-xl p-4 text-md ${option === sub && "text-blue-700 bg-green-500 bg-opacity-10"
+                  }`}
                 onClick={() => setOption(sub)}
                 role="presentation"
                 key={sub}>
@@ -132,9 +131,8 @@ const Index = ({ self, user, friendData, token }) => {
           })}
           {self && (
             <div
-              className={`cursor-pointer flex justify-center rounded-xl p-4 text-md ${
-                option === "Pending Requests" && "text-blue-700 bg-green-500 bg-opacity-10"
-              }`}
+              className={`cursor-pointer flex justify-center rounded-xl p-4 text-md ${option === "Pending Requests" && "text-blue-700 bg-green-500 bg-opacity-10"
+                }`}
               onClick={() => setOption("Pending Requests")}
               role="presentation"
               key="Pending Requests">
@@ -213,13 +211,15 @@ const Index = ({ self, user, friendData, token }) => {
       <main className="main bg-gray-100 md:col-span-5 p-20">
         {option === "Books" && (
           <Box mt={2}>
-            <ul>
-              {user.books.map((a) => (
-                <li key={a.id}>
-                  <Card {...a} />
-                </li>
-              ))}
-            </ul>
+            <div className="container my-12 mx-auto px-4 md:px-12">
+              <ul className="flex flex-wrap -mx-1 lg:-mx-4">
+                {user.books.map((a) => (
+                  <li key={a.id} className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+                    <Card {...a} />
+                  </li>
+                ))}
+              </ul>
+            </div>
           </Box>
         )}
         {option === "Friends" && <MyFriends token={token} username={user.username} />}
